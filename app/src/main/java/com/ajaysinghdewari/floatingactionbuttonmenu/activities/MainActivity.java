@@ -8,16 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.ajaysinghdewari.floatingactionbuttonmenu.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    FloatingActionButton fab, fab1, fab2, fab3;
+    FloatingActionButton fab, fab1, fab2, fab3, fabSnack;
     LinearLayout fabLayout1, fabLayout2, fabLayout3;
     View fabBGLayout;
+    Snackbar sk;
     boolean isFABOpen=false;
+    boolean isSnackOpen=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         fab1 = (FloatingActionButton) findViewById(R.id.fab1);
         fab2= (FloatingActionButton) findViewById(R.id.fab2);
         fab3 = (FloatingActionButton) findViewById(R.id.fab3);
+        fabSnack = (FloatingActionButton) findViewById(R.id.fab_snack);
         fabBGLayout=findViewById(R.id.fabBGLayout);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +52,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 closeFABMenu();
+            }
+        });
+
+        fabSnack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!isSnackOpen){
+                    sk = Snackbar.make(view, "Hazzah!", Snackbar.LENGTH_INDEFINITE);
+                    sk.show();
+                }else{
+                    sk.dismiss();
+                }
+                isSnackOpen = !isSnackOpen;
             }
         });
     }
